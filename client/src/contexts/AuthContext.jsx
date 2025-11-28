@@ -87,7 +87,7 @@ export function AuthProvider({ children }) {
       // if your API returns token on signup, use it; otherwise expect login
       if (data.token) {
         setToken(data.token);
-        console.log(data)
+        // console.log(data)
         setUser({ username: data.username || username });
       }
 

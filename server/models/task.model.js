@@ -1,11 +1,14 @@
+// server/models/Task.js
 const mongoose = require("mongoose");
 
-// Task model for CRUD
-const TaskSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  status: { type: String, enum: ["todo", "doing", "done"], default: "todo" },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
-});
+const TaskSchema = new mongoose.Schema(
+  {
+    title:  { type: String, required: true },
+    description: { type: String, default: "" },
+    status: { type: String, enum: ["todo", "doing", "done"], default: "todo" },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  },
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Task", TaskSchema);

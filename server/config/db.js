@@ -1,4 +1,3 @@
-// config/db.js
 const mongoose = require('mongoose');
 
 module.exports = function connectDB(uri) {

@@ -1,5 +1,5 @@
 // models/index.js
-const User = require('./task.model');
-const Task = require('./user.model');
+const Task = require('./task.model');
+const User = require('./user.model');
 
 module.exports = { User, Task };

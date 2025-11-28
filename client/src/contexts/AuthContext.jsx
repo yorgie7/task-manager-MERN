@@ -68,7 +68,7 @@ export function AuthProvider({ children }) {
     return res;
   };
 
-  const signup = async ({ username, password,  role = 'admin'  }) => {
+  const signup = async ({ username, password  }) => {
     setLoading(true);
     try {
       const res = await fetch(`${API}/auth/signup`, {
@@ -87,6 +87,7 @@ export function AuthProvider({ children }) {
       // if your API returns token on signup, use it; otherwise expect login
       if (data.token) {
         setToken(data.token);
+        console.log(data)
         setUser({ username: data.username || username });
       }
 
@@ -116,7 +117,6 @@ export function AuthProvider({ children }) {
       setToken(data.token);
       const parsedUser = data.user || { username };
       setUser(parsedUser);
-
       setLoading(false);
       return data;
     } catch (err) {

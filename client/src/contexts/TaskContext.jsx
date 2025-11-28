@@ -73,10 +73,12 @@ export const TasksProvider = ({ children }) => {
   };
 
   const getTask = (id) => tasks.find(t => t._id === id) || null;
- 
+
+
   return (
-    <TasksContext.Provider value={{ tasks, loading, error, refresh, createTask, updateTask, deleteTask, getTask }}>
+    <TasksContext.Provider
+      value={{ tasks, loading, error, refresh, createTask, updateTask, deleteTask, getTask }}>
       {children}
-    </TasksContext.Provider> 
+    </TasksContext.Provider>
   );
 };

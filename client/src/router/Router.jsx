@@ -2,8 +2,9 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
-import TasksList from '../pages/TasksList';
+import HomePage from '../pages/HomePage';
 import TaskForm from '../pages/TaskForm';
+import PageNotFound from '../pages/PageNotFound';
 import ProtectedRoute from '../components/ProtectedRoute';
 
 
@@ -19,11 +20,10 @@ export default function AppRouter() {
                 path="/tasks"
                 element={
                     <ProtectedRoute>
-                        <TasksList />
+                        <HomePage />
                     </ProtectedRoute>
                 }
             />
-
 
             <Route
                 path="/tasks/new"
@@ -34,7 +34,6 @@ export default function AppRouter() {
                 }
             />
 
-
             <Route
                 path="/tasks/:id/edit"
                 element={
@@ -44,7 +43,7 @@ export default function AppRouter() {
                 }
             />
 
-            <Route path="*" element={<div>404 - Not found</div>} />
+            <Route path="*" element={<PageNotFound />} />
         </Routes>
     );
 }

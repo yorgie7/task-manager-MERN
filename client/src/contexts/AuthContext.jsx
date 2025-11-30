@@ -4,9 +4,9 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
-// set this in .env: REACT_APP_API_ENDPOINT=http://localhost:5000/api
 
-const API = process.env.REACT_APP_API_ENDPOINT || "/api";
+const API =`${process.env.REACT_APP_API_ENDPOINT}/api` || "/api";
+
 const TOKEN_KEY = "app_token";
 const USER_KEY = "auth_user";
 
@@ -87,7 +87,7 @@ export function AuthProvider({ children }) {
       // if your API returns token on signup, use it; otherwise expect login
       if (data.token) {
         setToken(data.token);
-        console.log(data)
+        // console.log(data)
         setUser({ username: data.username || username });
       }
 

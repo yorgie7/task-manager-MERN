@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { TasksProvider } from './contexts/TaskContext';
 import AppRouter from './router/Router';
-import Navbar from './components/Navbar';
+import Navbar from './components/layout/Navbar';
 
 
 export default function App() {

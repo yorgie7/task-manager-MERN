@@ -1,11 +1,11 @@
 import { useState, useMemo } from 'react';
-import TasksList from '../components/TasksList';
+import TasksList from '../components/tasks/TasksList';
 import { useNavigate } from 'react-router-dom';
 import { useTasks } from '../contexts/TaskContext';
 import { useAuth } from '../contexts/AuthContext';
 
-// Lucide Icons
-import { Filter, Plus } from 'lucide-react';
+import { Filter } from 'lucide-react';
+import NewTaskButton from '../components/tasks/buttons/NewTaskButton';
 
 export default function HomePage() {
 
@@ -34,11 +34,10 @@ export default function HomePage() {
                     {/* Filter Button */}
                     <button
                         onClick={() => setShowCompletedOnly(prev => !prev)}
-                        className={`px-3 py-1 border rounded flex items-center gap-2 ${
-                            showCompletedOnly
+                        className={`px-3 py-1 border rounded flex items-center gap-2 ${showCompletedOnly
                                 ? 'bg-blue-600 text-white border-blue-700'
                                 : 'bg-white text-slate-700'
-                        }`}
+                            }`}
                     >
                         <Filter size={16} />
                         <span className="text-sm">
@@ -46,14 +45,7 @@ export default function HomePage() {
                         </span>
                     </button>
 
-                    {/* New Task */}
-                    <button
-                        onClick={() => navigate('/tasks/new')}
-                        className="px-3 py-1 bg-green-600 text-white rounded flex items-center gap-2"
-                    >
-                        <Plus size={16} />
-                        <span>New Task</span>
-                    </button>
+                    <NewTaskButton onClick={() => navigate('/tasks/new')} />
 
                 </div>
             </div>

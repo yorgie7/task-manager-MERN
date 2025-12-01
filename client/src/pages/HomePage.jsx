@@ -11,7 +11,7 @@ export default function HomePage() {
 
     const [showCompletedOnly, setShowCompletedOnly] = useState(false);
 
-    const { tasks, updateTask } = useTasks();
+    const { tasks, updateTask, loading } = useTasks();
     const { user } = useAuth();
     const navigate = useNavigate();
 
@@ -25,16 +25,16 @@ export default function HomePage() {
     const isAdmin = (user.role === 'admin');
 
     return (<>
-    <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold">My Tasks</h2>
 
                 <div className="flex items-center gap-2">
-
                     {/* Filter Button */}
                     <button
                         onClick={() => setShowCompletedOnly(prev => !prev)}
-                        className={`px-3 py-1 border rounded flex items-center gap-2 ${showCompletedOnly
+                        className={`px-3 py-1 border rounded flex items-center gap-2
+                             ${showCompletedOnly
                                 ? 'bg-blue-600 text-white border-blue-700'
                                 : 'bg-white text-slate-700'
                             }`}
@@ -51,6 +51,7 @@ export default function HomePage() {
             </div>
 
             <TasksList
+                loading={loading}
                 tasks={displayedTasks}
                 isAdmin={isAdmin}
                 onUpdate={updateTask}
@@ -62,6 +63,6 @@ export default function HomePage() {
 
         <Outlet />
     </>
-        
+
     );
 }

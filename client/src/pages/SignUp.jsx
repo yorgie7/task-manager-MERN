@@ -29,7 +29,6 @@ export default function SignUp() {
 
             <form onSubmit={submit} className="space-y-5">
                 
-                {/* Username */}
                 <div className="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white dark:bg-slate-700 border-slate-300 dark:border-slate-600">
                     <Mail className="w-5 h-5 text-slate-500 dark:text-slate-300" />
                     <input
@@ -43,7 +42,6 @@ export default function SignUp() {
                     />
                 </div>
 
-                {/* Password */}
                 <div className="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white dark:bg-slate-700 border-slate-300 dark:border-slate-600">
                     <Lock className="w-5 h-5 text-slate-500 dark:text-slate-300" />
                     <input

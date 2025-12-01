@@ -6,11 +6,18 @@ import StatusBadge from "./StatusBadge";
 const DONE = "done";
 const TODO = "todo";
 
-export default function TaskCard({ task: t, titleColor, onEdit, onDelete, onUpdate, isAdmin }) {
-
+export default function TaskCard({
+  task: t,
+  titleColor,
+  onEdit,
+  onDelete,
+  onUpdate,
+  isAdmin,
+  username
+}) {
   const isCompleted = t.status === DONE;
+  const selfCreated = t.createdBy?.username === username;
 
-  // map friendly color names to Tailwind classes (text + muted fallback)
   const titleColorMap = {
     neutral: "text-slate-800 dark:text-slate-100",
     indigo: "text-indigo-600 dark:text-indigo-400",
@@ -20,11 +27,14 @@ export default function TaskCard({ task: t, titleColor, onEdit, onDelete, onUpda
     violet: "text-violet-600 dark:text-violet-400",
   };
 
-  function getTitleClass(isCompleted) {
-    if (isCompleted) {
-      return "text-emerald-700 dark:text-emerald-300";
-    }
+  function getTitleClass() {
+    if (isCompleted) return "text-emerald-700 dark:text-emerald-300";
     return titleColorMap[titleColor] ?? titleColorMap.indigo;
+  }
+
+  function handleToggleStatus() {
+    if (!onUpdate) return;
+    onUpdate(t._id, { status: isCompleted ? TODO : DONE });
   }
 
   return (
@@ -43,32 +53,39 @@ export default function TaskCard({ task: t, titleColor, onEdit, onDelete, onUpda
         <div className="flex-1 min-w-0">
           <div
             id={`task-title-${t._id}`}
-            className={`font-semibold text-base leading-snug truncate ${getTitleClass(
-              isCompleted
-            )}`}
+            className={`font-semibold text-base leading-snug truncate ${getTitleClass()}`}
             title={t.title}
           >
             {t.title}
           </div>
-          
           <div className="text-sm text-slate-700 dark:text-slate-300 mt-2 mb-4 line-clamp-5">
             {t.description}
           </div>
 
-          <div className="border-b border-slate-200 dark:border-slate-700 my-2"></div>
+          <div className="border-b border-slate-200 dark:border-slate-700 my-2" />
 
-          {/* BOTTOM AREA (DATE + BUTTONS ROW) */}
-          <div className="flex items-center justify-between">
-            <div className="text-xs text-slate-500 dark:text-slate-400">
+          <div className="flex items-center justify-between flex-wrap gap-2 mt-2 text-xs">
+            <span className="text-slate-500 dark:text-slate-400">
               {t.createdAt ? new Date(t.createdAt).toLocaleString() : "—"}
-            </div>
+            </span>
 
-            <div className="flex items-center gap-2">
+            <span className="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+              <span>By:</span>
+              {selfCreated ? (
+                <span className="font-medium text-slate-700 dark:text-slate-300">You</span>
+              ) : (
+                <span className="font-medium text-blue-600 dark:text-blue-400">
+                  {t.createdBy?.username || "Unknown"}
+                </span>
+              )}
+            </span>
+            
+            <div className="ml-auto flex items-center gap-2">
               <TaskActions
                 isAdmin={isAdmin}
                 isCompleted={isCompleted}
                 status={t.status}
-                onUpdate={() => onUpdate && onUpdate(t._id, { status: isCompleted ? TODO : DONE })}
+                onUpdate={handleToggleStatus}
                 onEdit={() => onEdit && onEdit(t._id)}
                 onDelete={() => onDelete && onDelete(t._id)}
               />
@@ -77,6 +94,5 @@ export default function TaskCard({ task: t, titleColor, onEdit, onDelete, onUpda
         </div>
       </div>
     </li>
-
-  )
+  );
 }

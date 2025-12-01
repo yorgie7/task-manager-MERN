@@ -44,16 +44,13 @@ export default function DeleteTask() {
   
   return (
     <>
-      {/* Overlay */}
       <div
         className="fixed inset-0 bg-black/40 z-40 dark:bg-black60"
         onClick={handleCancel}
       />
 
-      {/* Modal */}
       <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg max-w-md w-full p-6 relative">
-          {/* Close button */}
           <button
             onClick={handleCancel}
             className="absolute top-4 right-4 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
@@ -61,17 +58,14 @@ export default function DeleteTask() {
             <X className="w-5 h-5" />
           </button>
 
-          {/* Header */}
           <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <Trash2 className="w-6 h-6 text-red-600" /> Delete Task
           </h2>
 
-          {/* Confirmation message */}
           <p className="text-slate-700 dark:text-slate-200 mb-6">
             Are you sure you want to delete <strong>{task?.title}</strong> created by <strong>{task?.createdBy}</strong>?
           </p>
 
-          {/* Actions */}
           <div className="flex justify-end gap-3">
             <button
               onClick={handleCancel}

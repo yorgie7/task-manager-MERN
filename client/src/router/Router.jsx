@@ -8,7 +8,6 @@ import PageNotFound from '../pages/PageNotFound';
 import ProtectedRoute from '../components/ProtectedRoute';
 import DeleteTask from '../pages/DeleteTask';
 
-
 export default function AppRouter() {
     return (
         <Routes>

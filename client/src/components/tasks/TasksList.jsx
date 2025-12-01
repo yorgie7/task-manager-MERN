@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from "react";
 import TaskCard from "./TaskCard";
 import Pagination from "../ui/Pagination";
+import FullPageSpinner from "../ui/FullpageSpinner";  
 
 export default function TasksList({
+  user,
   tasks = [],
   isAdmin = false,
   onUpdate,
@@ -11,21 +13,15 @@ export default function TasksList({
   titleColor = "indigo",
   pageSize = 5,
 }) {
-
-
   const [page, setPage] = useState(1);
-
   const pageCount = Math.max(1, Math.ceil(tasks.length / pageSize));
 
-  // If tasks shrink, clamp page
   if (page > pageCount) setPage(pageCount);
 
   const pageItems = useMemo(() => {
     const start = (page - 1) * pageSize;
     return tasks.slice(start, start + pageSize);
   }, [tasks, page, pageSize]);
-
-  // map friendly color names to Tailwind classes (text + muted fallback)
 
   if (!tasks || tasks.length === 0) {
     return (
@@ -44,7 +40,9 @@ export default function TasksList({
       {
         pageItems.map((t) => {
           return <TaskCard
+            key={t._id}
             isAdmin={isAdmin}
+            username={user.username}
             task={t}
             onEdit={onEdit}
             onDelete={onDelete}

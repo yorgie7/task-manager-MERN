@@ -30,7 +30,6 @@ export default function Navbar() {
     <nav className="bg-white border-b border-slate-200 dark:bg-slate-900 dark:border-slate-800">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Left: Brand */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
               <ListTodo className="w-6 h-6" />
@@ -39,8 +38,7 @@ export default function Navbar() {
               </span>
             </Link>
           </div>
-
-          {/* Right: desktop actions */}
+          
           <div className="hidden sm:flex sm:items-center sm:gap-3">
             {user ? (
               <>

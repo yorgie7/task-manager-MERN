@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from "react";
 import TaskCard from "./TaskCard";
 import Pagination from "../ui/Pagination";
-import FullPageSpinner from "../ui/FullpageSpinner";  
 
 export default function TasksList({
   user,

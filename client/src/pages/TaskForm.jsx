@@ -26,6 +26,13 @@ export default function TaskForm({ editMode }) {
     }
   }, [editMode, id, getTask]);
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   const submit = (e) => {
     e.preventDefault();
     if (editMode) updateTask(id, form);
@@ -34,7 +41,7 @@ export default function TaskForm({ editMode }) {
   };
 
   return (
-    <>  
+    <>
       <div
         className="fixed inset-0 bg-black/40 z-40 dark:bg-black60"
         onClick={() => navigate("../")}

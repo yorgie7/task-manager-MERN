@@ -82,13 +82,10 @@ export function AuthProvider({ children }) {
         throw new Error(data?.message || "Signup failed");
       }
 
-
       if (data.token) {
         setToken(data.token);
-        // console.log(data)
         setUser({ username: data.username || username });
       }
-
       setLoading(false);
       return data;
     } catch (err) {

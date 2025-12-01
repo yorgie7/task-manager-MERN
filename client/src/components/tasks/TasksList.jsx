@@ -26,6 +26,8 @@ export default function TasksList({
     return tasks.slice(start, start + pageSize);
   }, [tasks, page, pageSize]);
 
+  if (loading) return <FullPageSpinner message="Loading Tasks"  />
+
   if (!tasks || tasks.length === 0) {
     return (
       <div
@@ -38,13 +40,12 @@ export default function TasksList({
     );
   }
 
-  if (loading) return <FullPageSpinner message="Loading Tasks" />
   return (<>
     <ul className="space-y-3">
       {
         pageItems.map((t) => {
           return <TaskCard
-          key={t._id}
+            key={t._id}
             isAdmin={isAdmin}
             task={t}
             onEdit={onEdit}

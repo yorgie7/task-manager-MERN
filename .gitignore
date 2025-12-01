@@ -8,13 +8,23 @@ client/node_modules/
 # -------------------
 # Environment files
 # -------------------
+# All environment files
 .env
-server/.env
+.env.*
+*.env
+*.env.*
+
+# Client env files
 client/.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+client/.env.*
+client/*.env
+client/*.env.*
+
+# Server env files
+server/.env
+server/.env.*
+server/*.env
+server/*.env.*
 
 # -------------------
 # Production builds

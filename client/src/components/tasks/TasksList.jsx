@@ -1,11 +1,10 @@
 import React, { useState, useMemo } from "react";
 import TaskCard from "./TaskCard";
 import Pagination from "../ui/Pagination";
-import FullPageSpinner from "../ui/FullpageSpinner";
-import { useAuth } from "../../contexts/AuthContext";
+import FullPageSpinner from "../ui/FullpageSpinner";  
 
 export default function TasksList({
-  loading = false,
+  user,
   tasks = [],
   isAdmin = false,
   onUpdate,
@@ -14,12 +13,8 @@ export default function TasksList({
   titleColor = "indigo",
   pageSize = 5,
 }) {
-
-
   const [page, setPage] = useState(1);
-
   const pageCount = Math.max(1, Math.ceil(tasks.length / pageSize));
-  const { user } = useAuth()
 
   if (page > pageCount) setPage(pageCount);
 
@@ -27,8 +22,6 @@ export default function TasksList({
     const start = (page - 1) * pageSize;
     return tasks.slice(start, start + pageSize);
   }, [tasks, page, pageSize]);
-
-  if (loading) return <FullPageSpinner message="Loading Tasks" />
 
   if (!tasks || tasks.length === 0) {
     return (

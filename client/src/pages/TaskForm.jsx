@@ -85,7 +85,7 @@ export default function TaskForm({ editMode }) {
               className="w-full border px-3 py-2 rounded-lg h-28 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-200"
             />
 
-            <label className="flex items-center gap-2 cursor-pointer text-slate-900 dark:text-slate-100">
+            {/* <label className="flex items-center gap-2 cursor-pointer text-slate-900 dark:text-slate-100">
               <input
                 type="checkbox"
                 checked={form.completed}
@@ -94,10 +94,9 @@ export default function TaskForm({ editMode }) {
                 }
               />
               <span className="flex items-center gap-1">
-                <CheckSquare className="w-4 h-4 text-slate-600 dark:text-slate-300" />
                 Mark as Completed
               </span>
-            </label>
+            </label> */}
 
             <div className="flex gap-3">
               <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">

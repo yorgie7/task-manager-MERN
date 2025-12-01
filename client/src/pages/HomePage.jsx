@@ -4,9 +4,9 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { useTasks } from '../contexts/TaskContext';
 import { useAuth } from '../contexts/AuthContext';
 
-import { Filter } from 'lucide-react';
 import NewTaskButton from '../components/tasks/buttons/NewTaskButton';
 import HideDoneTaskButton from '../components/tasks/buttons/HIdeDoneTaskButton';
+import FullPageSpinner from '../components/ui/FullpageSpinner';
 
 export default function HomePage() {
 
@@ -31,19 +31,22 @@ export default function HomePage() {
                 <h2 className="text-xl font-semibold">My Tasks</h2>
 
                 <div className="flex items-center gap-2">
-                    <HideDoneTaskButton onClick={() => setShowCompletedOnly(prev => !prev)}/>
+                    <HideDoneTaskButton onClick={() => setShowCompletedOnly(prev => !prev)} />
                     <NewTaskButton onClick={() => navigate('new')} />
                 </div>
             </div>
 
-            <TasksList
-                loading={loading}
-                tasks={displayedTasks}
-                isAdmin={isAdmin}
-                onUpdate={updateTask}
-                onEdit={(id) => navigate(`${id}/edit`)}
-                onDelete={(id) => navigate(`${id}/delete`)}
-            />
+            { !loading ? 
+                <TasksList
+                    user={user}
+                    loading={loading}
+                    tasks={displayedTasks}
+                    isAdmin={isAdmin}
+                    onUpdate={updateTask}
+                    onEdit={(id) => navigate(`${id}/edit`)}
+                    onDelete={(id) => navigate(`${id}/delete`)}
+                /> : <FullPageSpinner />
+            }
         </div>
 
 

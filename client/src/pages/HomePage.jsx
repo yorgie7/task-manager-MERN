@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import TasksList from '../components/tasks/TasksList';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { useTasks } from '../contexts/TaskContext';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -11,7 +11,7 @@ export default function HomePage() {
 
     const [showCompletedOnly, setShowCompletedOnly] = useState(false);
 
-    const { tasks, updateTask, deleteTask } = useTasks();
+    const { tasks, updateTask } = useTasks();
     const { user } = useAuth();
     const navigate = useNavigate();
 
@@ -24,8 +24,8 @@ export default function HomePage() {
 
     const isAdmin = (user.role === 'admin');
 
-    return (
-        <div className="max-w-3xl mx-auto">
+    return (<>
+    <div className="max-w-3xl mx-auto">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold">My Tasks</h2>
 
@@ -45,7 +45,7 @@ export default function HomePage() {
                         </span>
                     </button>
 
-                    <NewTaskButton onClick={() => navigate('/tasks/new')} />
+                    <NewTaskButton onClick={() => navigate('new')} />
 
                 </div>
             </div>
@@ -54,9 +54,14 @@ export default function HomePage() {
                 tasks={displayedTasks}
                 isAdmin={isAdmin}
                 onUpdate={updateTask}
-                onDelete={deleteTask}
-                onEdit={(id) => navigate(`/tasks/${id}/edit`)}
+                onEdit={(id) => navigate(`${id}/edit`)}
+                onDelete={(id) => navigate(`${id}/delete`)}
             />
         </div>
+
+
+        <Outlet />
+    </>
+        
     );
 }

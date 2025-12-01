@@ -1,4 +1,3 @@
-// src/components/ui/button.jsx
 import React from "react";
 
 /**

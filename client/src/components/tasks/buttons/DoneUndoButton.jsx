@@ -1,11 +1,9 @@
 import React from "react";
 import { Check, Undo2 } from "lucide-react";
+import { Button } from "../../ui/button";
 
-/**
- * Props:
- * - isDone: boolean
- * - onClick: fn
- */
+
+
 export default function DoneUndoButton({ isDone = false, onClick }) {
   const base =
     "px-3 py-1.5 rounded-sm flex items-center gap-1 text-sm font-medium border transition";
@@ -15,7 +13,7 @@ export default function DoneUndoButton({ isDone = false, onClick }) {
     "border-blue-600 text-blue-700 hover:bg-blue-50 dark:text-blue-300 dark:border-blue-500 dark:hover:bg-blue-900/20";
 
   return (
-    <button
+    <Button
       onClick={onClick}
       aria-label={isDone ? "Mark as todo" : "Mark as done"}
       className={`${base} ${isDone ? doneCls : todoCls}`}
@@ -31,6 +29,6 @@ export default function DoneUndoButton({ isDone = false, onClick }) {
           <span className="hidden sm:inline">Done</span>
         </>
       )}
-    </button>
+    </Button>
   );
 }

@@ -11,7 +11,7 @@ export default function App() {
     <Router>
       <AuthProvider>
         <TasksProvider>
-          <div className="min-h-screen bg-slate-50">
+          <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
             <Navbar />
             <main className="p-6">
               <AppRouter />

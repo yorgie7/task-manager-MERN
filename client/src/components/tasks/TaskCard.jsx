@@ -50,7 +50,7 @@ export default function TaskCard({ task: t, titleColor, onEdit, onDelete, onUpda
           >
             {t.title}
           </div>
-          =
+          
           <div className="text-sm text-slate-700 dark:text-slate-300 mt-2 mb-4 line-clamp-5">
             {t.description}
           </div>

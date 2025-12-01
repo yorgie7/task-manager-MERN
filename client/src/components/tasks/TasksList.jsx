@@ -1,14 +1,7 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import TaskCard from "./TaskCard";
+import Pagination from "../ui/Pagination";
 
-
-/**
- * Props:
- * - tasks: array
- * - isAdmin: boolean
- * - onUpdate, onDelete, onEdit: callbacks
- * - titleColor (optional): one of "neutral" | "indigo" | "emerald" | "sky" | "amber" | "violet"
- */
 export default function TasksList({
   tasks = [],
   isAdmin = false,
@@ -16,7 +9,24 @@ export default function TasksList({
   onDelete,
   onEdit,
   titleColor = "indigo",
+  pageSize = 5,
 }) {
+
+
+  const [page, setPage] = useState(1);
+
+  const pageCount = Math.max(1, Math.ceil(tasks.length / pageSize));
+
+  // If tasks shrink, clamp page
+  if (page > pageCount) setPage(pageCount);
+
+  const pageItems = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return tasks.slice(start, start + pageSize);
+  }, [tasks, page, pageSize]);
+
+  // map friendly color names to Tailwind classes (text + muted fallback)
+
   if (!tasks || tasks.length === 0) {
     return (
       <div
@@ -29,20 +39,22 @@ export default function TasksList({
     );
   }
 
-  // map friendly color names to Tailwind classes (text + muted fallback)
-
-  return (
+  return (<>
     <ul className="space-y-3">
       {
-        tasks.map((t) => {
+        pageItems.map((t) => {
           return <TaskCard
             isAdmin={isAdmin}
-            task={t} onEdit={onEdit}
+            task={t}
+            onEdit={onEdit}
             onDelete={onDelete}
             onUpdate={onUpdate}
             titleColor={titleColor} />
         })
       }
     </ul>
+
+    <Pagination page={page} pageCount={pageCount} onPageChange={setPage} />
+  </>
   );
 }

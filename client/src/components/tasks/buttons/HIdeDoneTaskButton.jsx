@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../../ui/button';
 
 export default function HideDoneTaskButton({ showCompletedOnly, onClick }) {
     return (

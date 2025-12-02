@@ -5,7 +5,7 @@ import { useTasks } from '../contexts/TaskContext';
 import { useAuth } from '../contexts/AuthContext';
 
 import NewTaskButton from '../components/tasks/buttons/NewTaskButton';
-import HideDoneTaskButton from '../components/tasks/buttons/HIdeDoneTaskButton';
+import HideDoneTaskButton from '../components/tasks/buttons/HideDoneTaskButton';
 import FullPageSpinner from '../components/ui/FullpageSpinner';
 
 export default function HomePage() {

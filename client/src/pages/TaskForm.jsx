@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTasks } from "../contexts/TaskContext";
-import { FileEdit, PlusCircle, CheckSquare, X } from "lucide-react";
+import { FileEdit, PlusCircle, X } from "lucide-react";
 
 export default function TaskForm({ editMode }) {
   const { id } = useParams();

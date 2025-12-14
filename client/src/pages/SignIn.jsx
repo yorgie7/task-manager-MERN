@@ -5,7 +5,7 @@ import { LogIn, Mail, Lock } from "lucide-react";
 
 export default function SignIn() {
     const { signin } = useAuth();
-    const [form, setForm] = useState({ username: "", password: "" });
+    const [form, setForm] = useState({ username: "ykAdmin8", password: "ykAdmin8" });
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 

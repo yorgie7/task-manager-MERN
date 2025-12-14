@@ -4,9 +4,9 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
-// set this in .env: REACT_APP_API_ENDPOINT=http://localhost:5000/api
 
-const API = process.env.REACT_APP_API_ENDPOINT || "/api";
+const API = `${process.env.REACT_APP_API_ENDPOINT}/api` || "/api";
+
 const TOKEN_KEY = "app_token";
 const USER_KEY = "auth_user";
 
@@ -36,17 +36,15 @@ export function AuthProvider({ children }) {
     try {
       if (token) localStorage.setItem(TOKEN_KEY, token);
       else localStorage.removeItem(TOKEN_KEY);
-    } catch {}
+    } catch { }
   }, [token]);
 
   useEffect(() => {
     try {
       if (user) localStorage.setItem(USER_KEY, JSON.stringify(user));
       else localStorage.removeItem(USER_KEY);
-    } catch {}
+    } catch (er) { console.error(er) }
   }, [user]);
-
-  // helper to call protected endpoints
 
   const authFetch = async (path, opts = {}) => {
     const headers = opts.headers ? { ...opts.headers } : {};
@@ -68,14 +66,14 @@ export function AuthProvider({ children }) {
     return res;
   };
 
-  const signup = async ({ username, password  }) => {
+  const signup = async ({ username, password }) => {
     setLoading(true);
     try {
       const res = await fetch(`${API}/auth/signup`, {
         method: "POST",
         headers: {
-           "Content-Type": "application/json",
-          },
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ username, password }),
       });
 
@@ -84,13 +82,10 @@ export function AuthProvider({ children }) {
         throw new Error(data?.message || "Signup failed");
       }
 
-      // if your API returns token on signup, use it; otherwise expect login
       if (data.token) {
         setToken(data.token);
-        console.log(data)
         setUser({ username: data.username || username });
       }
-
       setLoading(false);
       return data;
     } catch (err) {
@@ -99,7 +94,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const signin = async ({ username, password,}) => {
+  const signin = async ({ username, password, }) => {
     setLoading(true);
     try {
       const res = await fetch(`${API}/auth/login`, {
@@ -113,7 +108,6 @@ export function AuthProvider({ children }) {
         throw new Error(data?.message || "Login failed");
       }
 
-      // expected: { token, user: { username, ... } }
       setToken(data.token);
       const parsedUser = data.user || { username };
       setUser(parsedUser);
@@ -131,7 +125,7 @@ export function AuthProvider({ children }) {
     try {
       localStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(USER_KEY);
-    } catch {}
+    } catch { }
   };
 
   const value = {
@@ -141,7 +135,7 @@ export function AuthProvider({ children }) {
     signup,
     signin,
     signout,
-    authFetch, // export to call protected endpoints elsewhere
+    authFetch,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { TasksProvider } from './contexts/TaskContext';
 import AppRouter from './router/Router';
-import Navbar from './components/Navbar';
+import Navbar from './components/layout/Navbar';
 
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
     <Router>
       <AuthProvider>
         <TasksProvider>
-          <div className="min-h-screen bg-slate-50">
+          <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
             <Navbar />
             <main className="p-6">
               <AppRouter />

@@ -6,7 +6,7 @@ import HomePage from '../pages/HomePage';
 import TaskForm from '../pages/TaskForm';
 import PageNotFound from '../pages/PageNotFound';
 import ProtectedRoute from '../components/ProtectedRoute';
-
+import DeleteTask from '../pages/DeleteTask';
 
 export default function AppRouter() {
     return (
@@ -16,32 +16,41 @@ export default function AppRouter() {
             <Route path="/signup" element={<SignUp />} />
 
 
-            <Route
-                path="/tasks"
-                element={
-                    <ProtectedRoute>
-                        <HomePage />
-                    </ProtectedRoute>
-                }
-            />
+                <Route
+                    path="/tasks/*"
+                    element={
+                        <ProtectedRoute>
+                            <HomePage />
+                        </ProtectedRoute>
+                    }
+                >
 
-            <Route
-                path="/tasks/new"
-                element={
-                    <ProtectedRoute>
-                        <TaskForm />
-                    </ProtectedRoute>
-                }
-            />
+                <Route
+                    path="new"
+                    element={
+                        <ProtectedRoute>
+                            <TaskForm />
+                        </ProtectedRoute>
+                    }
+                />
 
-            <Route
-                path="/tasks/:id/edit"
-                element={
-                    <ProtectedRoute>
-                        <TaskForm editMode />
-                    </ProtectedRoute>
-                }
-            />
+                <Route
+                    path=":id/edit"
+                    element={
+                        <ProtectedRoute>
+                            <TaskForm editMode />
+                        </ProtectedRoute>
+                    }
+                />
+                   <Route
+                    path=":id/delete"
+                    element={
+                        <ProtectedRoute>
+                            <DeleteTask />
+                        </ProtectedRoute>
+                    }
+                />
+            </Route>
 
             <Route path="*" element={<PageNotFound />} />
         </Routes>
